@@ -12,26 +12,28 @@ import { Textarea } from '@/components/ui/textarea';
 
 type MansionForm = {
     name: string;
+    email: string;
     position: string;
-    mansionName: string;
-    locationPrefecture: string;
-    managementMethod: string;
-    whyWantToUseHSS: string;
+    mansion_name: string;
+    location_prefecture: string;
+    management_method: string;
+    why_want_to_use_hss: string;
 };
 
-const MansionRegistration = () => {
+const MansionRegistration = ({ success }: { success: string }) => {
     const { data, setData, post, processing, errors } = useForm<Required<MansionForm>>({
         name: '',
+        email: '',
         position: '',
-        mansionName: '',
-        locationPrefecture: '',
-        managementMethod: '',
-        whyWantToUseHSS: '',
+        mansion_name: '',
+        location_prefecture: '',
+        management_method: '',
+        why_want_to_use_hss: '',
     });
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
-        post(route('mansion.register'));
+        post(route('mansion-register.store'));
     };
 
     return (
@@ -40,6 +42,12 @@ const MansionRegistration = () => {
             <div className="py-10">
                 <div className="mx-auto max-w-2xl">
                     <h1 className="mb-8 text-center text-3xl font-bold">Mansion Registration</h1>
+
+                    {success && (
+                        <div className="mb-4 rounded-md border border-green-500 p-4 text-green-500 dark:border-green-600 dark:text-green-600">
+                            {success}
+                        </div>
+                    )}
 
                     <form onSubmit={submit} className="space-y-6">
                         <div className="grid gap-6">
@@ -60,6 +68,18 @@ const MansionRegistration = () => {
                                     <InputError message={errors.name} />
                                 </div>
 
+                                <div className="grid gap-2">
+                                    <Label htmlFor="email">Your Email</Label>
+                                    <Input
+                                        id="email"
+                                        type="email"
+                                        value={data.email}
+                                        onChange={(e) => setData('email', e.target.value)}
+                                        placeholder="Enter your email"
+                                        required
+                                    />
+                                    <InputError message={errors.email} />
+                                </div>
                                 <div className="grid gap-2">
                                     <Label htmlFor="position">Your Position</Label>
                                     <Select value={data.position} onValueChange={(value) => setData('position', value)}>
@@ -83,34 +103,34 @@ const MansionRegistration = () => {
                                 <h2 className="text-xl font-semibold">Mansion Information</h2>
 
                                 <div className="grid gap-2">
-                                    <Label htmlFor="mansionName">Name of the Mansion</Label>
+                                    <Label htmlFor="mansion_name">Name of the Mansion</Label>
                                     <Input
-                                        id="mansionName"
+                                        id="mansion_name"
                                         type="text"
-                                        value={data.mansionName}
-                                        onChange={(e) => setData('mansionName', e.target.value)}
+                                        value={data.mansion_name}
+                                        onChange={(e) => setData('mansion_name', e.target.value)}
                                         placeholder="Enter mansion name"
                                         required
                                     />
-                                    <InputError message={errors.mansionName} />
+                                    <InputError message={errors.mansion_name} />
                                 </div>
 
                                 <div className="grid gap-2">
-                                    <Label htmlFor="locationPrefecture">Location Prefecture</Label>
+                                    <Label htmlFor="location_prefecture">Location Prefecture</Label>
                                     <Input
-                                        id="locationPrefecture"
+                                        id="location_prefecture"
                                         type="text"
-                                        value={data.locationPrefecture}
-                                        onChange={(e) => setData('locationPrefecture', e.target.value)}
+                                        value={data.location_prefecture}
+                                        onChange={(e) => setData('location_prefecture', e.target.value)}
                                         placeholder="Enter prefecture"
                                         required
                                     />
-                                    <InputError message={errors.locationPrefecture} />
+                                    <InputError message={errors.location_prefecture} />
                                 </div>
 
                                 <div className="grid gap-2">
-                                    <Label htmlFor="managementMethod">Mansion Management Method</Label>
-                                    <Select value={data.managementMethod} onValueChange={(value) => setData('managementMethod', value)}>
+                                    <Label htmlFor="management_method">Mansion Management Method</Label>
+                                    <Select value={data.management_method} onValueChange={(value) => setData('management_method', value)}>
                                         <SelectTrigger>
                                             <SelectValue placeholder="Select management method" />
                                         </SelectTrigger>
@@ -119,7 +139,7 @@ const MansionRegistration = () => {
                                             <SelectItem value="MKG">MKG</SelectItem>
                                         </SelectContent>
                                     </Select>
-                                    <InputError message={errors.managementMethod} />
+                                    <InputError message={errors.management_method} />
                                 </div>
                             </div>
 
@@ -128,20 +148,20 @@ const MansionRegistration = () => {
                                 <h2 className="text-xl font-semibold">Additional Information</h2>
 
                                 <div className="grid gap-2">
-                                    <Label htmlFor="whyWantToUseHSS">Why do you want to use HSS?</Label>
+                                    <Label htmlFor="why_want_to_use_hss">Why do you want to use HSS?</Label>
                                     <Textarea
-                                        id="whyWantToUseHSS"
-                                        value={data.whyWantToUseHSS}
-                                        onChange={(e: ChangeEvent<HTMLTextAreaElement>) => setData('whyWantToUseHSS', e.target.value)}
+                                        id="why_want_to_use_hss"
+                                        value={data.why_want_to_use_hss}
+                                        onChange={(e: ChangeEvent<HTMLTextAreaElement>) => setData('why_want_to_use_hss', e.target.value)}
                                         placeholder="Please explain why you want to use HSS"
                                         required
                                         rows={4}
                                     />
-                                    <InputError message={errors.whyWantToUseHSS} />
+                                    <InputError message={errors.why_want_to_use_hss} />
                                 </div>
                             </div>
 
-                            <Button type="submit" className="w-full" disabled={processing}>
+                            <Button type="submit" className="w-full cursor-pointer" disabled={processing || !!success}>
                                 {processing && <LoaderCircle className="mr-2 h-4 w-4 animate-spin" />}
                                 Submit Registration
                             </Button>
