@@ -5,7 +5,8 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import DashboardLayout from '@/layouts/dashboard-layout';
 import { BreadcrumbItem, MansionRegistration } from '@/types';
 import { Head } from '@inertiajs/react';
-import { CheckCircle, EllipsisVertical, Eye, Pencil, Trash2, XCircle } from 'lucide-react';
+import { EllipsisVertical, Eye, Pencil, Trash2, XCircle } from 'lucide-react';
+import ApproveProcess from './approve-process';
 
 const MansionRegistrations = ({ mansionRegistrations }: { mansionRegistrations: MansionRegistration[] }) => {
     const breadcrumbs: BreadcrumbItem[] = [
@@ -63,11 +64,12 @@ const MansionRegistrations = ({ mansionRegistrations }: { mansionRegistrations: 
                                                         </Button>
                                                     </DropdownMenuTrigger>
                                                     <DropdownMenuContent side="left" align="start">
-                                                        <DropdownMenuItem>
-                                                            <CheckCircle className="mr-2 h-4 w-4" />
-                                                            Accept
-                                                        </DropdownMenuItem>
-                                                        <DropdownMenuItem>
+                                                        <ApproveProcess mansionRegistration={mansionRegistration} />
+                                                        <DropdownMenuItem
+                                                            disabled={
+                                                                mansionRegistration.status === 'rejected' || mansionRegistration.status === 'approved'
+                                                            }
+                                                        >
                                                             <XCircle className="mr-2 h-4 w-4" />
                                                             Reject
                                                         </DropdownMenuItem>
@@ -79,7 +81,7 @@ const MansionRegistrations = ({ mansionRegistrations }: { mansionRegistrations: 
                                                             <Pencil className="mr-2 h-4 w-4" />
                                                             Edit
                                                         </DropdownMenuItem>
-                                                        <DropdownMenuItem>
+                                                        <DropdownMenuItem disabled={mansionRegistration.status === 'approved'}>
                                                             <Trash2 className="mr-2 h-4 w-4" />
                                                             Delete
                                                         </DropdownMenuItem>

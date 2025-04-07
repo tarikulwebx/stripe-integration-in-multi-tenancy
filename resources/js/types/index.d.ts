@@ -59,3 +59,14 @@ export interface MansionRegistration {
     created_at: string;
     updated_at: string;
 }
+
+export interface Tenant {
+    id: string;
+    name: string;
+    email: string;
+    password: string;
+    mansion_name: string;
+    mansion_registration_id: number;
+    created_at: string;
+    updated_at: string;
+}

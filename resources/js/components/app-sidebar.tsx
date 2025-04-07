@@ -4,7 +4,7 @@ import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid, UserRound } from 'lucide-react';
+import { BookOpen, Building2, Folder, LayoutGrid, TicketPlus } from 'lucide-react';
 import AppLogo from './app-logo';
 
 const footerNavItems: NavItem[] = [
@@ -31,9 +31,16 @@ export function AppSidebar() {
         {
             title: 'Mansion Registrations',
             href: route('admin.mansion-registrations.index'),
-            icon: UserRound,
+            icon: TicketPlus,
             adminOnly: true,
             isActive: route().current('admin.mansion-registrations.index'),
+        },
+        {
+            title: 'Tenants',
+            href: route('admin.tenants.index'),
+            icon: Building2,
+            adminOnly: true,
+            isActive: route().current('admin.tenants.index'),
         },
     ];
 

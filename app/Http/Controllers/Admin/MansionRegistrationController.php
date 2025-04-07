@@ -7,6 +7,9 @@ use App\Models\MansionRegistration;
 use App\Http\Requests\StoreMansionRegistrationRequest;
 use App\Http\Requests\UpdateMansionRegistrationRequest;
 use App\Http\Resources\MansionRegistrationResource;
+use App\Models\Tenant;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 
 class MansionRegistrationController extends Controller
@@ -19,6 +22,8 @@ class MansionRegistrationController extends Controller
         $mansionRegistrations = MansionRegistration::all();
         return Inertia::render('admin/mansion-registrations/index', [
             'mansionRegistrations' => MansionRegistrationResource::collection($mansionRegistrations),
+            'success' => session('success'),
+            'error' => session('error'),
         ]);
     }
 
@@ -68,5 +73,29 @@ class MansionRegistrationController extends Controller
     public function destroy(MansionRegistration $mansionRegistration)
     {
         //
+    }
+
+    public function approve(MansionRegistration $mansionRegistration)
+    {
+        if ($mansionRegistration->status === 'approved' || $mansionRegistration->status === 'rejected') {
+            return redirect()->back()->with('error', 'Mansion registration already ' . $mansionRegistration->status);
+        }
+
+        DB::beginTransaction();
+        $mansionRegistration->status = 'approved';
+        $mansionRegistration->save();
+
+        $tenant = Tenant::create([
+            'name'                    => $mansionRegistration->name,
+            'email'                   => $mansionRegistration->email,
+            'password'                => $mansionRegistration->password,
+            'mansion_name'            => $mansionRegistration->mansion_name,
+            'mansion_registration_id' => $mansionRegistration->id,
+            'password'                => Str::upper(Str::random(6)),
+        ]);
+
+        DB::commit();
+
+        return redirect()->back()->with('success', 'Mansion registration approved successfully');
     }
 }
