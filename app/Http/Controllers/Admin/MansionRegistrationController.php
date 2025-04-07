@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\MansionRegistration;
 use App\Http\Requests\StoreMansionRegistrationRequest;
 use App\Http\Requests\UpdateMansionRegistrationRequest;
+use App\Http\Resources\MansionRegistrationResource;
 use Inertia\Inertia;
 
 class MansionRegistrationController extends Controller
@@ -17,7 +18,7 @@ class MansionRegistrationController extends Controller
     {
         $mansionRegistrations = MansionRegistration::all();
         return Inertia::render('admin/mansion-registrations/index', [
-            'mansionRegistrations' => $mansionRegistrations,
+            'mansionRegistrations' => MansionRegistrationResource::collection($mansionRegistrations),
         ]);
     }
 

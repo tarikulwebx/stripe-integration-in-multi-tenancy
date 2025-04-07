@@ -41,3 +41,20 @@ export interface User {
     updated_at: string;
     [key: string]: unknown; // This allows for additional properties...
 }
+
+export interface MansionRegistration {
+    id: number;
+    name: string;
+    email: string;
+    position: string;
+    mansion_name: string;
+    location_prefecture: string;
+    management_method: string;
+    why_want_to_use_hss: string;
+    status: string;
+    rejected_reason: string;
+    approved_at: string;
+    rejected_at: string;
+    created_at: string;
+    updated_at: string;
+}
