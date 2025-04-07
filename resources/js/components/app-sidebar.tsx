@@ -7,19 +7,6 @@ import { Link } from '@inertiajs/react';
 import { BookOpen, Folder, LayoutGrid, UserRound } from 'lucide-react';
 import AppLogo from './app-logo';
 
-const mainNavItems: NavItem[] = [
-    {
-        title: 'Dashboard',
-        href: '/dashboard',
-        icon: LayoutGrid,
-    },
-    {
-        title: 'Mansion Registrations',
-        href: route('admin.mansion-registrations.index'),
-        icon: UserRound,
-    },
-];
-
 const footerNavItems: NavItem[] = [
     {
         title: 'Repository',
@@ -34,6 +21,22 @@ const footerNavItems: NavItem[] = [
 ];
 
 export function AppSidebar() {
+    const mainNavItems: NavItem[] = [
+        {
+            title: 'Dashboard',
+            href: '/dashboard',
+            icon: LayoutGrid,
+            isActive: route().current('dashboard'),
+        },
+        {
+            title: 'Mansion Registrations',
+            href: route('admin.mansion-registrations.index'),
+            icon: UserRound,
+            adminOnly: true,
+            isActive: route().current('admin.mansion-registrations.index'),
+        },
+    ];
+
     return (
         <Sidebar collapsible="icon" variant="inset">
             <SidebarHeader>
