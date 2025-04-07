@@ -18,6 +18,10 @@ class MansionRegistration extends Model
         'rejected_reason',
         'approved_at',
         'rejected_at',
-        'tenant_id',
     ];
+
+    public function tenant()
+    {
+        return $this->hasOne(Tenant::class, 'mansion_registration_id');
+    }
 }

@@ -72,12 +72,13 @@ class MansionRegistrationController extends Controller
      */
     public function destroy(MansionRegistration $mansionRegistration)
     {
-        //
+        $mansionRegistration->delete();
+        return redirect()->back()->with('success', 'Mansion registration deleted successfully');
     }
 
     public function approve(MansionRegistration $mansionRegistration)
     {
-        if ($mansionRegistration->status === 'approved' || $mansionRegistration->status === 'rejected') {
+        if (($mansionRegistration->status === 'approved' && $mansionRegistration->tenant) || $mansionRegistration->status === 'rejected') {
             return redirect()->back()->with('error', 'Mansion registration already ' . $mansionRegistration->status);
         }
 
@@ -95,6 +96,8 @@ class MansionRegistrationController extends Controller
         ]);
 
         DB::commit();
+
+        // tenancy()->initialize($tenant);
 
         return redirect()->back()->with('success', 'Mansion registration approved successfully');
     }

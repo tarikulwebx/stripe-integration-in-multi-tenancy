@@ -5,8 +5,9 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import DashboardLayout from '@/layouts/dashboard-layout';
 import { BreadcrumbItem, MansionRegistration } from '@/types';
 import { Head } from '@inertiajs/react';
-import { EllipsisVertical, Eye, Pencil, Trash2, XCircle } from 'lucide-react';
+import { EllipsisVertical, Eye, Pencil, XCircle } from 'lucide-react';
 import ApproveProcess from './approve-process';
+import DeleteRegistration from './delete-registration';
 
 const MansionRegistrations = ({ mansionRegistrations }: { mansionRegistrations: MansionRegistration[] }) => {
     const breadcrumbs: BreadcrumbItem[] = [
@@ -19,6 +20,8 @@ const MansionRegistrations = ({ mansionRegistrations }: { mansionRegistrations: 
     return (
         <DashboardLayout breadcrumbs={breadcrumbs}>
             <Head title="Mansion Registrations" />
+
+            {/* <pre>{JSON.stringify(mansionRegistrations, null, 2)}</pre> */}
             <div className="p-4">
                 <Card>
                     <CardHeader>
@@ -81,10 +84,7 @@ const MansionRegistrations = ({ mansionRegistrations }: { mansionRegistrations: 
                                                             <Pencil className="mr-2 h-4 w-4" />
                                                             Edit
                                                         </DropdownMenuItem>
-                                                        <DropdownMenuItem disabled={mansionRegistration.status === 'approved'}>
-                                                            <Trash2 className="mr-2 h-4 w-4" />
-                                                            Delete
-                                                        </DropdownMenuItem>
+                                                        <DeleteRegistration mansionRegistration={mansionRegistration} />
                                                     </DropdownMenuContent>
                                                 </DropdownMenu>
                                             </TableCell>

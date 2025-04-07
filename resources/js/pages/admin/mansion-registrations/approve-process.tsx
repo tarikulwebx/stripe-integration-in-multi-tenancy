@@ -23,7 +23,7 @@ const ApproveProcess = ({ mansionRegistration }: { mansionRegistration: MansionR
     return (
         <DropdownMenuItem
             onSelect={(e) => handleApprove(e)}
-            disabled={processing || mansionRegistration.status === 'approved' || mansionRegistration.status === 'rejected'}
+            disabled={(!!mansionRegistration.tenant && mansionRegistration.status === 'approved') || mansionRegistration.status === 'rejected'}
         >
             {processing ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <CheckCircle className="mr-2 h-4 w-4" />}
             {processing ? 'Approving...' : 'Approve'}

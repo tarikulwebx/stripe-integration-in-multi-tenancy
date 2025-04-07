@@ -59,6 +59,7 @@ export interface MansionRegistration {
     rejected_at: string;
     created_at: string;
     updated_at: string;
+    tenant?: Tenant | null;
 }
 
 export interface Tenant {
