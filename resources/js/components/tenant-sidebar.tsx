@@ -4,7 +4,7 @@ import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, Sid
 import { SharedData, type NavItem } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
 import { BookOpen, Folder, LayoutGrid } from 'lucide-react';
-import AppLogo from './app-logo';
+import TenantLogo from './tenant-logo';
 
 const footerNavItems: NavItem[] = [
     {
@@ -39,7 +39,7 @@ export function TenantSidebar() {
                     <SidebarMenuItem>
                         <SidebarMenuButton size="lg" asChild>
                             <Link href={route('app.home', app.id)} prefetch>
-                                <AppLogo />
+                                <TenantLogo />
                             </Link>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
