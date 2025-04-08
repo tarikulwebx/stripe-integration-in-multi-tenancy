@@ -4,7 +4,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import DashboardLayout from '@/layouts/dashboard-layout';
 import { BreadcrumbItem, Tenant } from '@/types';
-import { Head } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import { format } from 'date-fns';
 import { EllipsisVertical, Eye, Pencil } from 'lucide-react';
 import DeleteOption from './delete-option';
@@ -43,7 +43,11 @@ const Tenants = ({ tenants }: { tenants: Tenant[] }) => {
                                     {tenants.map((tenant) => (
                                         <TableRow key={tenant.id}>
                                             <TableCell>{tenant.id}</TableCell>
-                                            <TableCell>{tenant.mansion_name}</TableCell>
+                                            <TableCell>
+                                                <Link className="text-sm font-medium" href={route('app.home', { tenant: tenant.id })}>
+                                                    {tenant.mansion_name}
+                                                </Link>
+                                            </TableCell>
                                             <TableCell>{tenant.name}</TableCell>
                                             <TableCell>{tenant.email}</TableCell>
                                             <TableCell>

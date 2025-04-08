@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateMansionRegistrationRequest;
 use App\Http\Resources\MansionRegistrationResource;
 use App\Models\Plan;
 use App\Models\Tenant;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
@@ -107,7 +108,12 @@ class MansionRegistrationController extends Controller
 
         DB::commit();
 
-        // tenancy()->initialize($tenant);
+        tenancy()->initialize($tenant);
+        $user = User::create([
+            'name' => $mansionRegistration->name,
+            'email' => $mansionRegistration->email,
+            'password' => $tenant->password,
+        ]);
 
         return redirect()->back()->with('success', 'Mansion registration approved successfully');
     }
