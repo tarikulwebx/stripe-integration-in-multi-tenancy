@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Http\Controllers\Tenant\AccountController;
 use App\Http\Controllers\Tenant\HomeController;
+use App\Http\Controllers\Tenant\UserController;
 use Illuminate\Support\Facades\Route;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 use Stancl\Tenancy\Middleware\InitializeTenancyByPath;
@@ -31,4 +32,5 @@ Route::group([
 ], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/account', [AccountController::class, 'index'])->name('account');
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');
 });
