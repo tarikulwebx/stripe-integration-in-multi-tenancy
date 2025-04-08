@@ -21,7 +21,14 @@ use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 |
 */
 
-Route::group(['prefix' => 'app/{tenant}', 'as' => 'app.', 'middleware' => InitializeTenancyByPath::class], function () {
+Route::group([
+    'prefix' => 'app/{tenant}',
+    'as' => 'app.',
+    'middleware' => [
+        InitializeTenancyByPath::class,
+        'web',
+    ]
+], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/account', [AccountController::class, 'index'])->name('account');
 });
