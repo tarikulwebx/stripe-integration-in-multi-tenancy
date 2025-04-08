@@ -7,6 +7,7 @@ use App\Models\MansionRegistration;
 use App\Http\Requests\StoreMansionRegistrationRequest;
 use App\Http\Requests\UpdateMansionRegistrationRequest;
 use App\Http\Resources\MansionRegistrationResource;
+use App\Models\Plan;
 use App\Models\Tenant;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -94,6 +95,15 @@ class MansionRegistrationController extends Controller
             'mansion_registration_id' => $mansionRegistration->id,
             'password'                => Str::upper(Str::random(6)),
         ]);
+
+        $tenant->createAsStripeCustomer();
+
+        $freePlan = Plan::where('name', 'Free')->first();
+
+        $tenant->newSubscription('default', $freePlan->stripe_price_id)
+            ->skipTrial()
+            ->allowPromotionCodes()
+            ->create();
 
         DB::commit();
 

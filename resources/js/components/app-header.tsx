@@ -11,7 +11,7 @@ import { useInitials } from '@/hooks/use-initials';
 import { cn } from '@/lib/utils';
 import { type BreadcrumbItem, type NavItem, type SharedData } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
-import { BookOpen, Building2, DollarSign, Folder, Home, Menu, Search, User } from 'lucide-react';
+import { BookOpen, Building2, DollarSign, Folder, Grid2X2, Home, Menu, Search, User } from 'lucide-react';
 import AppLogo from './app-logo';
 import AppLogoIcon from './app-logo-icon';
 
@@ -30,6 +30,12 @@ const mainNavItems: NavItem[] = [
         title: 'Register',
         href: '/mansion-register',
         icon: Building2,
+    },
+    {
+        title: 'Dashboard',
+        href: '/dashboard',
+        icon: Grid2X2,
+        auth: true,
     },
 ];
 
