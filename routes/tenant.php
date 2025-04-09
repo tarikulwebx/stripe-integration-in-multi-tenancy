@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Http\Controllers\Tenant\AccountController;
 use App\Http\Controllers\Tenant\HomeController;
+use App\Http\Controllers\Tenant\LoginController;
 use App\Http\Controllers\Tenant\UserController;
 use Illuminate\Support\Facades\Route;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
@@ -32,5 +33,11 @@ Route::group([
 ], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/account', [AccountController::class, 'index'])->name('account');
+    Route::get('/billing-portal', [AccountController::class, 'billingPortal'])->name('billing-portal');
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
+
+    Route::middleware('guest')->group(function () {
+        Route::get('/login', [LoginController::class, 'form'])->name('login.form');
+        Route::post('/login', [LoginController::class, 'login'])->name('login');
+    });
 });
