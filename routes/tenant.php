@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\Tenant\AccountController;
+use App\Http\Controllers\Tenant\FeatureController;
 use App\Http\Controllers\Tenant\HomeController;
 use App\Http\Controllers\Tenant\LoginController;
 use App\Http\Controllers\Tenant\UserController;
@@ -40,4 +41,6 @@ Route::group([
         Route::get('/login', [LoginController::class, 'form'])->name('login.form');
         Route::post('/login', [LoginController::class, 'login'])->name('login');
     });
+
+    Route::get('/features', [FeatureController::class, 'index'])->name('features.index');
 });

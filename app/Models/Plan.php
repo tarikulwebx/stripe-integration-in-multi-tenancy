@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Cashier\Subscription;
 
 class Plan extends Model
 {
@@ -13,4 +14,9 @@ class Plan extends Model
         'stripe_product_id',
         'stripe_price_id',
     ];
+
+    public function features()
+    {
+        return $this->belongsToMany(Feature::class, 'feature_plan');
+    }
 }

@@ -3,7 +3,7 @@ import { NavMain } from '@/components/nav-main';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { SharedData, type NavItem } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
-import { BadgeInfo, BookOpen, Folder, LayoutGrid, Users } from 'lucide-react';
+import { BadgeInfo, BookOpen, Folder, LayoutGrid, List, Users } from 'lucide-react';
 import TenantLogo from './tenant-logo';
 
 const footerNavItems: NavItem[] = [
@@ -41,6 +41,12 @@ export function TenantSidebar() {
             href: route('app.account', app.id),
             icon: BadgeInfo,
             isActive: route().current('app.account', app.id),
+        },
+        {
+            title: 'Features',
+            href: route('app.features.index', app.id),
+            icon: List,
+            isActive: route().current('app.features.index', app.id),
         },
     ];
 
