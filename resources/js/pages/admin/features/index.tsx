@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import DashboardLayout from '@/layouts/dashboard-layout';
 import { Feature } from '@/types';
-import { Head } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import { Pencil, Plus, Trash } from 'lucide-react';
 
 const FeaturesIndex = ({ features }: { features: Feature[] }) => {
@@ -60,8 +60,11 @@ const FeaturesIndex = ({ features }: { features: Feature[] }) => {
                                                 variant="ghost"
                                                 size="icon"
                                                 className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
+                                                asChild
                                             >
-                                                <Pencil className="h-4 w-4" />
+                                                <Link href={route('admin.features.edit', feature.id)}>
+                                                    <Pencil className="h-4 w-4" />
+                                                </Link>
                                             </Button>
                                             <Button
                                                 variant="ghost"

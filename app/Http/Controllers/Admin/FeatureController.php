@@ -51,7 +51,9 @@ class FeatureController extends Controller
      */
     public function edit(Feature $feature)
     {
-        //
+        return Inertia::render('admin/features/edit', [
+            'feature' => $feature,
+        ]);
     }
 
     /**

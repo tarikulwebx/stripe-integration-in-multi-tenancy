@@ -13,5 +13,5 @@ Route::middleware(['auth', 'verified', 'admin'])->prefix('admin')->name('admin.'
     Route::get('/tenants', [TenantController::class, 'index'])->name('tenants.index');
     Route::delete('/tenants/{tenant}', [TenantController::class, 'destroy'])->name('tenants.destroy');
 
-    Route::get('/features', [FeatureController::class, 'index'])->name('features.index');
+    Route::resource('features', FeatureController::class);
 });
