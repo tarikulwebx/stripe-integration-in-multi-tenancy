@@ -4,7 +4,7 @@ import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Building2, Folder, LayoutGrid, TicketPlus } from 'lucide-react';
+import { BookOpen, Building2, Folder, LayoutGrid, List, TicketPlus } from 'lucide-react';
 import AppLogo from './app-logo';
 
 const footerNavItems: NavItem[] = [
@@ -41,6 +41,13 @@ export function AppSidebar() {
             icon: Building2,
             adminOnly: true,
             isActive: route().current('admin.tenants.index'),
+        },
+        {
+            title: 'Features',
+            href: route('admin.features.index'),
+            icon: List,
+            adminOnly: true,
+            isActive: route().current('admin.features.index'),
         },
     ];
 

@@ -74,6 +74,12 @@ export interface Tenant {
     updated_at: string;
 }
 
+export interface Plan {
+    id: number;
+    name: string;
+    created_at: string;
+    updated_at: string;
+}
 export interface Feature {
     id: number;
     name: string;
@@ -81,4 +87,5 @@ export interface Feature {
     description: string;
     created_at: string;
     updated_at: string;
+    plans?: Plan[];
 }
