@@ -16,26 +16,30 @@ const Features = ({ features, planFeatures, directFeatures }: { features: Featur
                     </CardHeader>
                     <CardContent>
                         <div className="rounded-md border">
-                            <Table>
-                                <TableHeader>
-                                    <TableRow>
-                                        <TableHead>ID</TableHead>
-                                        <TableHead>Feature Name</TableHead>
-                                        <TableHead>Lookup Key</TableHead>
-                                        <TableHead>Description</TableHead>
-                                    </TableRow>
-                                </TableHeader>
-                                <TableBody>
-                                    {features.map((feature) => (
-                                        <TableRow key={feature.id}>
-                                            <TableCell className="font-medium">{feature.id}</TableCell>
-                                            <TableCell>{feature.name}</TableCell>
-                                            <TableCell>{feature.lookup_key}</TableCell>
-                                            <TableCell>{feature.description}</TableCell>
+                            {features.length === 0 ? (
+                                <div className="text-muted-foreground p-4 text-center">No features available</div>
+                            ) : (
+                                <Table>
+                                    <TableHeader>
+                                        <TableRow>
+                                            <TableHead>ID</TableHead>
+                                            <TableHead>Feature Name</TableHead>
+                                            <TableHead>Lookup Key</TableHead>
+                                            <TableHead>Description</TableHead>
                                         </TableRow>
-                                    ))}
-                                </TableBody>
-                            </Table>
+                                    </TableHeader>
+                                    <TableBody>
+                                        {features.map((feature) => (
+                                            <TableRow key={feature.id}>
+                                                <TableCell className="font-medium">{feature.id}</TableCell>
+                                                <TableCell>{feature.name}</TableCell>
+                                                <TableCell>{feature.lookup_key}</TableCell>
+                                                <TableCell>{feature.description}</TableCell>
+                                            </TableRow>
+                                        ))}
+                                    </TableBody>
+                                </Table>
+                            )}
                         </div>
                     </CardContent>
                 </Card>
@@ -46,26 +50,30 @@ const Features = ({ features, planFeatures, directFeatures }: { features: Featur
                     </CardHeader>
                     <CardContent>
                         <div className="rounded-md border">
-                            <Table>
-                                <TableHeader>
-                                    <TableRow>
-                                        <TableHead>ID</TableHead>
-                                        <TableHead>Feature Name</TableHead>
-                                        <TableHead>Lookup Key</TableHead>
-                                        <TableHead>Description</TableHead>
-                                    </TableRow>
-                                </TableHeader>
-                                <TableBody>
-                                    {planFeatures.map((feature) => (
-                                        <TableRow key={feature.id}>
-                                            <TableCell>{feature.id}</TableCell>
-                                            <TableCell>{feature.name}</TableCell>
-                                            <TableCell>{feature.lookup_key}</TableCell>
-                                            <TableCell>{feature.description}</TableCell>
+                            {planFeatures.length === 0 ? (
+                                <div className="text-muted-foreground p-4 text-center">No plan features available</div>
+                            ) : (
+                                <Table>
+                                    <TableHeader>
+                                        <TableRow>
+                                            <TableHead>ID</TableHead>
+                                            <TableHead>Feature Name</TableHead>
+                                            <TableHead>Lookup Key</TableHead>
+                                            <TableHead>Description</TableHead>
                                         </TableRow>
-                                    ))}
-                                </TableBody>
-                            </Table>
+                                    </TableHeader>
+                                    <TableBody>
+                                        {planFeatures.map((feature) => (
+                                            <TableRow key={feature.id}>
+                                                <TableCell>{feature.id}</TableCell>
+                                                <TableCell>{feature.name}</TableCell>
+                                                <TableCell>{feature.lookup_key}</TableCell>
+                                                <TableCell>{feature.description}</TableCell>
+                                            </TableRow>
+                                        ))}
+                                    </TableBody>
+                                </Table>
+                            )}
                         </div>
                     </CardContent>
                 </Card>
@@ -76,26 +84,30 @@ const Features = ({ features, planFeatures, directFeatures }: { features: Featur
                     </CardHeader>
                     <CardContent>
                         <div className="rounded-md border">
-                            <Table>
-                                <TableHeader>
-                                    <TableRow>
-                                        <TableHead>ID</TableHead>
-                                        <TableHead>Feature Name</TableHead>
-                                        <TableHead>Lookup Key</TableHead>
-                                        <TableHead>Description</TableHead>
-                                    </TableRow>
-                                </TableHeader>
-                                <TableBody>
-                                    {directFeatures.map((feature) => (
-                                        <TableRow key={feature.id}>
-                                            <TableCell>{feature.id}</TableCell>
-                                            <TableCell>{feature.name}</TableCell>
-                                            <TableCell>{feature.lookup_key}</TableCell>
-                                            <TableCell>{feature.description}</TableCell>
+                            {directFeatures.length === 0 ? (
+                                <div className="text-muted-foreground p-4 text-center">No direct features available</div>
+                            ) : (
+                                <Table>
+                                    <TableHeader>
+                                        <TableRow>
+                                            <TableHead>ID</TableHead>
+                                            <TableHead>Feature Name</TableHead>
+                                            <TableHead>Lookup Key</TableHead>
+                                            <TableHead>Description</TableHead>
                                         </TableRow>
-                                    ))}
-                                </TableBody>
-                            </Table>
+                                    </TableHeader>
+                                    <TableBody>
+                                        {directFeatures.map((feature) => (
+                                            <TableRow key={feature.id}>
+                                                <TableCell>{feature.id}</TableCell>
+                                                <TableCell>{feature.name}</TableCell>
+                                                <TableCell>{feature.lookup_key}</TableCell>
+                                                <TableCell>{feature.description}</TableCell>
+                                            </TableRow>
+                                        ))}
+                                    </TableBody>
+                                </Table>
+                            )}
                         </div>
                     </CardContent>
                 </Card>
