@@ -52,7 +52,7 @@ class FeatureController extends Controller
     public function edit(Feature $feature)
     {
         return Inertia::render('admin/features/edit', [
-            'feature' => $feature,
+            'feature' => $feature->load('plans'),
         ]);
     }
 
@@ -61,7 +61,13 @@ class FeatureController extends Controller
      */
     public function update(UpdateFeatureRequest $request, Feature $feature)
     {
-        //
+        $validated = $request->validated();
+
+        $feature->update($validated);
+
+        $feature->plans()->sync($validated['plans']);
+
+        return redirect()->route('admin.features.index')->with('success', 'Feature updated successfully');
     }
 
     /**
