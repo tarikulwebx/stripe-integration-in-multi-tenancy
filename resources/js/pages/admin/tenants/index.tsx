@@ -1,3 +1,4 @@
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
@@ -6,7 +7,7 @@ import DashboardLayout from '@/layouts/dashboard-layout';
 import { BreadcrumbItem, Tenant } from '@/types';
 import { Head, Link } from '@inertiajs/react';
 import { format } from 'date-fns';
-import { EllipsisVertical, Eye, Pencil } from 'lucide-react';
+import { EllipsisVertical, Eye, List, Pencil } from 'lucide-react';
 import DeleteOption from './delete-option';
 import PasswordToggler from './password-toggler';
 const Tenants = ({ tenants }: { tenants: Tenant[] }) => {
@@ -32,6 +33,7 @@ const Tenants = ({ tenants }: { tenants: Tenant[] }) => {
                                     <TableRow>
                                         <TableHead>ID</TableHead>
                                         <TableHead>Mansion Name</TableHead>
+                                        <TableHead>Plan</TableHead>
                                         <TableHead>Name</TableHead>
                                         <TableHead>Email</TableHead>
                                         <TableHead>Password (Temp)</TableHead>
@@ -42,11 +44,21 @@ const Tenants = ({ tenants }: { tenants: Tenant[] }) => {
                                 <TableBody>
                                     {tenants.map((tenant) => (
                                         <TableRow key={tenant.id}>
-                                            <TableCell>{tenant.id}</TableCell>
+                                            <TableCell>
+                                                <Link href={route('app.home', { tenant: tenant.id })}>{tenant.id}</Link>
+                                            </TableCell>
                                             <TableCell>
                                                 <Link className="text-sm font-medium" href={route('app.home', { tenant: tenant.id })}>
                                                     {tenant.mansion_name}
                                                 </Link>
+                                            </TableCell>
+                                            <TableCell>
+                                                <Badge
+                                                    variant="outline"
+                                                    className={`${tenant.current_plan.name === 'Free' ? 'bg-gray-500' : tenant.current_plan.name === 'Pro' ? 'bg-blue-500' : 'bg-red-500'}`}
+                                                >
+                                                    {tenant.current_plan.name}
+                                                </Badge>
                                             </TableCell>
                                             <TableCell>{tenant.name}</TableCell>
                                             <TableCell>{tenant.email}</TableCell>
@@ -62,15 +74,23 @@ const Tenants = ({ tenants }: { tenants: Tenant[] }) => {
                                                         </Button>
                                                     </DropdownMenuTrigger>
                                                     <DropdownMenuContent side="left" align="start">
-                                                        <DropdownMenuItem>
-                                                            <Eye className="mr-2 h-4 w-4" />
-                                                            View
+                                                        <DropdownMenuItem asChild>
+                                                            <Link href={route('admin.tenants.show', tenant.id)}>
+                                                                <Eye className="mr-2 h-4 w-4" />
+                                                                View
+                                                            </Link>
                                                         </DropdownMenuItem>
                                                         <DropdownMenuItem>
                                                             <Pencil className="mr-2 h-4 w-4" />
                                                             Edit
                                                         </DropdownMenuItem>
                                                         <DeleteOption tenantId={tenant.id} />
+                                                        <DropdownMenuItem asChild>
+                                                            <Link href={route('admin.tenants.features', tenant.id)}>
+                                                                <List className="mr-2 h-4 w-4" />
+                                                                Features
+                                                            </Link>
+                                                        </DropdownMenuItem>
                                                     </DropdownMenuContent>
                                                 </DropdownMenu>
                                             </TableCell>

@@ -7,6 +7,9 @@ use App\Models\Tenant;
 use App\Http\Requests\StoreTenantRequest;
 use App\Http\Requests\UpdateTenantRequest;
 use App\Http\Resources\TenantResource;
+use App\Http\Resources\FeatureResource;
+use App\Models\Feature;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class TenantController extends Controller
@@ -45,7 +48,9 @@ class TenantController extends Controller
      */
     public function show(Tenant $tenant)
     {
-        //
+        return Inertia::render('admin/tenants/show', [
+            'tenant' => new TenantResource($tenant),
+        ]);
     }
 
     /**
@@ -71,5 +76,32 @@ class TenantController extends Controller
     {
         $tenant->delete();
         return redirect()->back()->with('success', 'Tenant deleted successfully');
+    }
+
+    public function features(Tenant $tenant)
+    {
+        return Inertia::render('admin/tenants/features', [
+            'tenant' => new TenantResource($tenant),
+            'all_features' => FeatureResource::collection(Feature::all()),
+            'features' => FeatureResource::collection($tenant->planFeatures()),
+            'direct_features' => FeatureResource::collection($tenant->features),
+        ]);
+    }
+
+    public function updateFeatures(Tenant $tenant, Request $request)
+    {
+        $request->validate([
+            'features' => 'nullable|array',
+            'features.*' => 'nullable|exists:features,id',
+        ]);
+
+        $tenant->features()->sync($request->features);
+        return redirect()->back()->with('success', 'Features updated successfully');
+    }
+
+    public function removeDirectFeature(Tenant $tenant, Feature $feature)
+    {
+        $tenant->features()->detach($feature);
+        return redirect()->back()->with('success', 'Feature removed successfully');
     }
 }

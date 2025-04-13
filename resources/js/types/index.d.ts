@@ -72,6 +72,7 @@ export interface Tenant {
     mansion_registration_id: number;
     created_at: string;
     updated_at: string;
+    current_plan: Plan;
 }
 
 export interface Plan {

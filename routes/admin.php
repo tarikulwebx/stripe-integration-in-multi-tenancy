@@ -12,6 +12,9 @@ Route::middleware(['auth', 'verified', 'admin'])->prefix('admin')->name('admin.'
 
     Route::get('/tenants', [TenantController::class, 'index'])->name('tenants.index');
     Route::delete('/tenants/{tenant}', [TenantController::class, 'destroy'])->name('tenants.destroy');
-
+    Route::get('/tenants/{tenant}', [TenantController::class, 'show'])->name('tenants.show');
+    Route::get('/tenants/{tenant}/features', [TenantController::class, 'features'])->name('tenants.features');
+    Route::put('/tenants/{tenant}/features', [TenantController::class, 'updateFeatures'])->name('tenants.features.update');
+    Route::delete('/tenants/{tenant}/features/{feature}', [TenantController::class, 'removeDirectFeature'])->name('tenants.features.remove');
     Route::resource('features', FeatureController::class);
 });

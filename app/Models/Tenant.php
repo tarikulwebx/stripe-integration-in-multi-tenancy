@@ -69,4 +69,9 @@ class Tenant extends BaseTenant implements TenantWithDatabase
         $allFeatures = $directFeatures->merge($planFeatures)->unique('id')->sortBy('id')->values();
         return $allFeatures;
     }
+
+    public function hasDirectFeature($feature)
+    {
+        return $this->features->contains('id', $feature->id);
+    }
 }

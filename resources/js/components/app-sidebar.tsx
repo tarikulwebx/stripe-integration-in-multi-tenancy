@@ -40,7 +40,7 @@ export function AppSidebar() {
             href: route('admin.tenants.index'),
             icon: Building2,
             adminOnly: true,
-            isActive: route().current('admin.tenants.index'),
+            isActive: route().current('admin.tenants.*'),
         },
         {
             title: 'Features',
