@@ -1,8 +1,5 @@
-<div style="text-align: center; background-color: #f0f0f0; color: #333; padding: 20px; border-radius: 10px;">
 <p style="font-size: 28px; font-weight: bold; text-align: center; margin-bottom: 0px;">Stripe in SaaS</p>
 <p style="font-size: 16px; text-align: center; margin-top: 0px;">This is a simple SaaS application built with Laravel and React (Inertia.js). It is a basic subscription management system that allows users to subscribe to a plan and manage their subscription.</p>
-</div>
-
 ## Features
 
 - [ ] User Authentication
