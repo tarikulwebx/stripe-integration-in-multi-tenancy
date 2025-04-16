@@ -1,6 +1,6 @@
-<h1 style="border-bottom: none; margin-bottom: 0px; text-align: center;">Stripe in SaaS</h1>
+# Stripe in SaaS
 
-<p style="margin-top: 0px; text-align: center;">This is a simple SaaS application built with Laravel and React (Inertia.js). It is a basic subscription management system that allows users to subscribe to a plan and manage their subscription.</p>
+This is a simple SaaS application built with Laravel and React (Inertia.js). It is a basic subscription management system that allows users to subscribe to a plan and manage their subscription.
 
 ## Features
 
