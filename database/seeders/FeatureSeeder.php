@@ -66,6 +66,8 @@ class FeatureSeeder extends Seeder
         foreach ($features as $feature) {
             $feature = Feature::firstOrCreate(['lookup_key' => $feature['lookup_key']], $feature);
 
+            /*
+
             $stripe = new StripeClient(config('cashier.secret'));
 
             $stripeFeatureLookupKeys = collect($stripe->entitlements->features->all()->data)->pluck('lookup_key')->toArray();
@@ -81,6 +83,8 @@ class FeatureSeeder extends Seeder
                     'description' => $feature['description'],
                 ],
             ]);
+
+            */
         }
     }
 }
